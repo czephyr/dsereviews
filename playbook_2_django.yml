@@ -1,0 +1,71 @@
+---
+
+- name: Deploy django
+  hosts: all
+  become: true
+  tasks:
+    - name: "Copy django webapp folder"
+      synchronize:
+        src: files/webapp
+        dest: ~ubuntu/
+        rsync_opts:
+          - "--chmod=F644"
+
+    - name: "Template initadmin"
+      ansible.builtin.template:
+        src: templates/initadmin.py.j2
+        dest: ~ubuntu/webapp/reviews/management/commands/initadmin.py
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: "Template django settings"
+      ansible.builtin.template:
+        src: templates/settings.py.j2
+        dest: ~ubuntu/webapp/djangoapp/settings.py
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: "Install python requirements"
+      ansible.builtin.pip:
+        requirements: ~ubuntu/webapp/requirements.txt
+
+    - name: "Make migrations"
+      ansible.builtin.command: python ~ubuntu/webapp/manage.py makemigrations
+
+    - name: "Migrate"
+      ansible.builtin.command: python ~ubuntu/webapp/manage.py migrate --no-input
+
+    - name: "Initadmin"
+      ansible.builtin.command: python ~ubuntu/webapp/manage.py initadmin 
+
+    - name: "Collectstatic"
+      ansible.builtin.command: python ~ubuntu/webapp/manage.py collectstatic --no-input --clear
+
+    - name: "Copy systemd gunicorn socket"
+      copy:
+        src: files/gunicorn.socket
+        dest: /etc/systemd/system/gunicorn.socket
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: "Copy systemd gunicorn service"
+      copy:
+        src: files/gunicorn.service
+        dest: /etc/systemd/system/gunicorn.service
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: "Start gunicorn socket"
+      command: "sudo systemctl start gunicorn.socket"
+
+    - name: "Enable gunicorn socket"
+      command: "sudo systemctl enable gunicorn.socket"
+
+    - name: "Restart service httpd, in all cases"
+      ansible.builtin.service:
+        name: gunicorn
+        state: restarted

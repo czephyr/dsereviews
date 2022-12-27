@@ -1,0 +1,6 @@
+postgresql_databases:
+  - name: dsereviewsdb
+
+# postgresql_users:
+#   - name: <VAULTED> 
+#     password: <VAULTED>

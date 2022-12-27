@@ -1,0 +1,5 @@
+# certbot_admin_email: <VAULTED>
+certbot_certs: 
+  - domains:
+    - dsereviews.live
+certbot_create_if_missing: True

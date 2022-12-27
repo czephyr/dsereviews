@@ -1,0 +1,30 @@
+---
+
+- name: Setup
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Running apt update
+      apt: update_cache=yes
+
+    - name: Installing required packages
+      apt: name={{ item }} state=present
+      with_items:
+        - python3-pip
+        - python-is-python3
+        - acl
+    - name: ufw enabled
+      community.general.ufw:
+        state: "enabled"
+        policy: "deny"
+        logging: "on"
+    - name: ufw rules
+      community.general.ufw:
+        rule: "allow"
+        port: "{{ item }}"
+        proto: "tcp"
+      with_items:
+        - "22"
+        - "80"
+        - "443"

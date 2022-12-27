@@ -1,0 +1,16 @@
+---
+
+- name: Setup
+  import_playbook: playbook_0_setup.yml
+
+- name: Deploy db
+  import_playbook: playbook_1_db.yml
+
+- name: Deploy django
+  import_playbook: playbook_2_django.yml
+
+- name: Deploy certbot
+  import_playbook: playbook_3_certbot.yml
+
+- name: Deploy nginx
+  import_playbook: playbook_4_nginx.yml

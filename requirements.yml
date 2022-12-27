@@ -1,0 +1,9 @@
+---
+
+collections:
+  - ansible.posix
+
+roles:
+  - name: geerlingguy.postgresql
+  - name: nginxinc.nginx
+  - name: geerlingguy.certbot

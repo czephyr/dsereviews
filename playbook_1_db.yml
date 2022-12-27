@@ -1,0 +1,7 @@
+---
+
+- name: Deploy postgre db
+  hosts: all
+  become: true
+  roles:
+    - geerlingguy.postgresql

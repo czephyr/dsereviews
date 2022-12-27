@@ -1,0 +1,7 @@
+---
+
+- name: Deploy certbot
+  hosts: all
+  become: true
+  roles:
+    - geerlingguy.certbot

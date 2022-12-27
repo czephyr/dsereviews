@@ -1,0 +1,6 @@
+Here is the activation link you requested.
+Click on this link to activate your account and complete your registration.
+
+{{site}}/accounts/activate/{{activation_key}}/
+
+(make sure to check your spam folder if you don't find your mail)

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}
+    dsereviews | {{ course.name }}
+{% endblock title %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="mb-5">
+        <h2>{{ course.name }}</h2>
+        <p class="fs-5 col-md-8">
+            {% for item in course.reaction_count %}
+                <span class="badge text-dark rounded-pill badge-light border border-2 border-dark">{{ item.emoji }} x{{ item.total }}</span>
+            {% endfor %}
+        </p>
+        <p class="fs-5 col-md-8">
+            Students evaluated the lectures of the course with an average grade of {{ course.lecture_avg }}/5 and the examination with an average grade of {{ course.exam_avg }}/5
+        </p>
+        <p>
+            Course taught by:
+            {% for professor in course.professor.all %}
+                <span class="badge text-dark rounded-pill badge-light border border-2 border-dark"><a class="text-dark" href="{{ professor.get_absolute_url }}">{{ professor.name }}</a></span>
+            {% endfor %}
+        </p>
+        {% if request.user.is_authenticated %}
+            <a data-bs-toggle="collapse"
+               href="#collapseExample"
+               role="button"
+               aria-expanded="false"
+               aria-controls="collapseExample">
+                Add a review
+            </a>
+            <div class="collapse" id="collapseExample">
+                <form method="post">
+                    <div class="row mb-1">
+                        <div class="col">
+                            <label for="id_professor" class="form-label">Professor</label>
+                            {% render_field review_form.professor class="form-control" %}
+                        </div>
+                        <div class="col">
+                            <label for="id_lectureStars" class="form-label">Grade the lectures</label>
+                            {% render_field review_form.lectureStars class="form-control" %}
+                        </div>
+                        <div class="col">
+                            <label for="id_examStars" class="form-label">Grade the examination</label>
+                            {% render_field review_form.examStars class="form-control" %}
+                        </div>
+                        <div class="col">
+                            <label for="id_emoji" class="form-label">How did it make you feel</label>
+                            {% render_field review_form.emoji class="form-control" %}
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col">
+                            <label for="id_text" class="form-label">Text of the review</label>
+                            {% render_field review_form.text class="form-control" maxlength="5000" minlength="100" placeholder="What are your thoughts about your exam experience? If you gave a low grade to the lectures or examination please try to explain your reasoning. A minimum of 100 characters is needed to submit. Please try to be constructive, offensive comments wont be tolerated." %}
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        {% else %}
+            <p><u>Login to review</u></p>
+        {% endif %}
+    </div>
+    <hr/>
+    <div class="row">
+        <h3>Reviews</h3>
+        <div class="p-3 mb-2">
+            {% for review in reviews %}
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1 fs-5">{{ review.professor }}</h5>
+                        <h6 class="card-subtitle mb-1 text-muted fs-8">Review posted: {{ review.created }}</h6>
+                        <p class="card-text">{{ review.text |linebreaksbr }}</p>
+                        <span class="badge text-dark rounded-pill badge-light border border-2 border-dark">{{ review.emoji }}</span>
+                        <span class="badge text-dark rounded-pill badge-light border border-2 border-dark">Examination: {{ review.lectureStars }}</span>
+                        <span class="badge text-dark rounded-pill badge-light border border-2 border-dark">Lectures: {{ review.examStars }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p>There are no reviews on this course yet.</p>
+            {% endfor %}
+            <p class="mt-3">{% include "pagination.html" with page=reviews %}</p>
+        </div>
+    </div>
+{% endblock content %}

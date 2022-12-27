@@ -1,0 +1,27 @@
+- name: Deploy nginx
+  hosts: all
+  become: true
+  tasks:
+    - name: "Install Nginx"
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: "Remove nginx default config"
+      ansible.builtin.file:
+        path: /etc/nginx/nginx.conf
+        state: absent
+
+    - name: "Copy nginx custom conf"
+      ansible.builtin.copy:
+        src: files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        mode: 0644
+
+    - name: "Give user www-data access to user ubuntu's home directory"
+      command: setfacl -R -m u:www-data:rwx ~ubuntu
+
+    - name: "Restart Nginx"
+      service:
+        name: nginx
+        state: restarted
