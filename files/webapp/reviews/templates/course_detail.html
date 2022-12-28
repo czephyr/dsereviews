@@ -51,7 +51,7 @@
                     <div class="row mb-1">
                         <div class="col">
                             <label for="id_text" class="form-label">Text of the review</label>
-                            {% render_field review_form.text class="form-control" maxlength="5000" minlength="100" placeholder="What are your thoughts about your exam experience? If you gave a low grade to the lectures or examination please try to explain your reasoning. A minimum of 100 characters is needed to submit. Please try to be constructive, offensive comments wont be tolerated." %}
+                            {% render_field review_form.text class="form-control" maxlength="5000" minlength="100" placeholder="What are your thoughts about your exam experience? If you gave a low grade to the lectures or examination please try to explain your reasoning. A minimum of 100 characters is needed to submit. Please try to be constructive, offensive comments will be removed." %}
                         </div>
                     </div>
                     {% csrf_token %}

@@ -37,4 +37,8 @@ class EmailDomainFilterRegistrationForm(RegistrationForm):
             raise forms.ValidationError(
                 "Only {} emails are allowed.".format(self.allowed_domain)
             )
+        if User.objects.filter(email=submitted_data).exists():
+            raise forms.ValidationError(
+                "This email is already registered."
+            )
         return submitted_data
