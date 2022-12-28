@@ -1,13 +1,3 @@
 #!/bin/bash
 
-VM_STATUS=$(vagrant status --machine-readable | grep ",state," | egrep -o '([a-z_]*)$')
-case "${VM_STATUS}" in
-  running)
-     vagrant rsync
-     vagrant provision
-  ;;
-  *)
-     vagrant up
-  ;;
-esac
-
+ansible-playbook -i inventories/preprod/hosts.ini playbook.yml --vault-password-file .vault.pwd "$@"

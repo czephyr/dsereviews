@@ -1,0 +1,4 @@
+certbot_testmode: false
+
+debug: 1
+django_allowed_hosts: dsereviews.live

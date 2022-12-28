@@ -3,3 +3,4 @@ certbot_certs:
   - domains:
     - dsereviews.live
 certbot_create_if_missing: True
+# certbot_testmode: <IN_INVENTORY>

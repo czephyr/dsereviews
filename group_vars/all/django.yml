@@ -1,6 +1,7 @@
-debug: 1
 # secret_key: <VAULTED>
-django_allowed_hosts: dsereviews.live
+
+# debug: <IN_INVENTORY>
+# django_allowed_hosts: <IN_INVENTORY>
 sql_engine: django.db.backends.postgresql
 # sql_database: <VAULTED>
 # sql_user: <VAULTED>
@@ -13,8 +14,8 @@ database: postgres
 # email_host: <VAULTED>
 # email_host_user: <VAULTED>
 # email_host_password: <VAULTED>
-# email_port: 587
-# email_use_tls: True
+email_port: 587
+email_use_tls: True
 
 # django super-user credentials
 # admin_username: <VAULTED>

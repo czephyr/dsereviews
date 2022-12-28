@@ -1,0 +1,4 @@
+certbot_testmode: True
+
+debug: 1
+django_allowed_hosts: 90.147.184.132
