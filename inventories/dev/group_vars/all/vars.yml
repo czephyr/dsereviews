@@ -1,0 +1,11 @@
+certbot_testmode: True
+
+debug: 1
+django_allowed_hosts: "*"
+
+sql_engine: django.db.backends.sqlite3
+sql_database: testdb
+sql_user: 
+sql_password:
+sql_host:
+sql_port:

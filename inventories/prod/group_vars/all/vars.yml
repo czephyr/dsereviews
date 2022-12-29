@@ -2,3 +2,11 @@ certbot_testmode: false
 
 debug: 1
 django_allowed_hosts: dsereviews.live
+
+sql_engine: django.db.backends.postgresql
+sql_database: dsereviewsdb
+sql_user: postgresdbuser
+sql_password: postgresdbpassword
+sql_host: localhost
+sql_port: 5432
+database: postgres

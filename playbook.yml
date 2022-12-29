@@ -2,15 +2,24 @@
 
 - name: Setup
   import_playbook: playbook_0_setup.yml
+  tags: remote
 
 - name: Deploy db
   import_playbook: playbook_1_db.yml
+  tags: remote
 
 - name: Deploy django
   import_playbook: playbook_2_django.yml
+  tags: remote
 
 - name: Deploy certbot
   import_playbook: playbook_3_certbot.yml
+  tags: remote
 
 - name: Deploy nginx
   import_playbook: playbook_4_nginx.yml
+  tags: remote
+
+- name: Run local django server
+  import_playbook: playbook_5_local.yml
+  tags: local

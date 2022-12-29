@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook -i inventories/preprod/hosts.ini playbook.yml --vault-password-file .vault.pwd "$@"
+ansible-playbook -i inventories/dev/hosts.ini playbook.yml --vault-password-file .vault.pwd "$@" --tags local
