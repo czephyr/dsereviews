@@ -1,10 +1,12 @@
-from django.db import models
-from django.contrib.auth.models import User
-from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.db.models import Avg
-from django.db.models import Count
+from django.db import models
+from django.db.models import Avg, Count
+from django.urls import reverse
 
+
+class User(AbstractUser):
+    bachelor = models.CharField(max_length=70, blank=True)
 
 class Professor(models.Model):
     name = models.CharField(max_length=60)
@@ -52,6 +54,15 @@ class Professor(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
+
+    field_choices = (
+        ("Mathemathics", "Mathemathics"),
+        ("Statistics", "Statistics"),
+        ("Computer Science", "Computer Science"),
+        ("Economics and Finance","Economics and Finance"),
+        ("Political Science","Political Science")
+    )
+    field = models.CharField(max_length=40, choices=field_choices)
 
     professor = models.ManyToManyField(
         Professor, through="Teaches", related_name="taughtBy"

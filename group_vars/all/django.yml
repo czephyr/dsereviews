@@ -2,13 +2,6 @@
 
 # debug: <IN_INVENTORY>
 # django_allowed_hosts: <IN_INVENTORY>
-sql_engine: django.db.backends.postgresql
-# sql_database: <VAULTED>
-# sql_user: <VAULTED>
-# sql_password: <VAULTED>
-sql_host: localhost
-sql_port: 5432
-database: postgres
 
 # email sending hosting credentials
 # email_host: <VAULTED>

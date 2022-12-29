@@ -31,14 +31,22 @@
       ansible.builtin.pip:
         requirements: ~ubuntu/webapp/requirements.txt
 
-    - name: "Make migrations"
-      ansible.builtin.command: python ~ubuntu/webapp/manage.py makemigrations
+    # - name: "Make migrations"
+    #   ansible.builtin.command: python ~ubuntu/webapp/manage.py makemigrations
+
+    - name: "Template admin migration"
+      ansible.builtin.template:
+        src: templates/0002_auto.py.j2
+        dest: ~ubuntu/webapp/reviews/migrations/0002_auto.py
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
 
     - name: "Migrate"
       ansible.builtin.command: python ~ubuntu/webapp/manage.py migrate --no-input
 
-    - name: "Initadmin"
-      ansible.builtin.command: python ~ubuntu/webapp/manage.py initadmin 
+    # - name: "Initadmin"
+    #   ansible.builtin.command: python ~ubuntu/webapp/manage.py initadmin 
 
     - name: "Collectstatic"
       ansible.builtin.command: python ~ubuntu/webapp/manage.py collectstatic --no-input --clear

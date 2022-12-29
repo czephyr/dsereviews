@@ -2,3 +2,13 @@ certbot_testmode: True
 
 debug: 1
 django_allowed_hosts: 90.147.184.132
+
+sql_engine: django.db.backends.postgresql
+sql_database: dsereviewsdb
+sql_user: postgresdbuser
+sql_password: postgresdbpassword
+sql_host: localhost
+sql_port: 5432
+database: postgres
+
+nginx_server_name: "_"

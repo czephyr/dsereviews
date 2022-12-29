@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "{{ secret_key }}" 
+SECRET_KEY = "django-insecure-t9gfde%(ew_!dc+7uwzj4gf@@)d(x&4ealv!huw8)9e@j5hwp3" 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = {{ debug }}
+DEBUG = 1
 
-ALLOWED_HOSTS = ["{{ django_allowed_hosts }}"]
+ALLOWED_HOSTS = ["*"]
 
 # ADDED CONFIGS
 # django.auth
@@ -34,11 +34,11 @@ LOGIN_REDIRECT_URL = "/reviews"
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 # SMTP
-EMAIL_HOST = "{{ email_host }}"
-EMAIL_HOST_USER = "{{ email_host_user}}"
-EMAIL_HOST_PASSWORD = "{{ email_host_password }}"
-EMAIL_PORT = "{{ email_port }}"
-EMAIL_USE_TLS = "{{ email_use_tls }}"
+EMAIL_HOST = "smtp-relay.sendinblue.com"
+EMAIL_HOST_USER = "imsohuman98@gmail.com"
+EMAIL_HOST_PASSWORD = "dNZRA5GfLQK8hVnO"
+EMAIL_PORT = "587"
+EMAIL_USE_TLS = "True"
 
 # Application definition
 
@@ -90,12 +90,12 @@ WSGI_APPLICATION = 'djangoapp.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "{{ sql_engine }}",
-        "NAME": "{{ sql_database }}",
-        "USER": "{{ sql_user }}",
-        "PASSWORD": "{{ sql_password }}",
-        "HOST": "{{ sql_host }}",
-        "PORT": "{{ sql_port }}",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "testdb",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
     }
 }
 
