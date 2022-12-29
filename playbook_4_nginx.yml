@@ -11,12 +11,11 @@
       ansible.builtin.file:
         path: /etc/nginx/nginx.conf
         state: absent
-
-    - name: "Copy nginx custom conf"
-      ansible.builtin.copy:
-        src: files/nginx.conf
+    
+    - name: "Template admin migration"
+      ansible.builtin.template:
+        src: templates/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
-        mode: 0644
 
     - name: "Give user www-data access to user ubuntu's home directory"
       command: setfacl -R -m u:www-data:rwx ~ubuntu

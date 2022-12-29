@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook -i inventories/preprod/hosts.ini playbook.yml --vault-password-file .vault.pwd "$@" --tags remote
+ansible-playbook -i inventories/preprod/hosts.ini playbook.yml --vault-password-file .vault.pwd "$@" --tags remote --skip-tags prod

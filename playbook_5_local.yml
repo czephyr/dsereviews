@@ -21,12 +21,18 @@
 
     - name: "Make migrations"
       ansible.builtin.command: python ~funicello/Desktop/dsereviews/files/webapp/manage.py makemigrations
+    
+    - name: "Template admin migration"
+      ansible.builtin.template:
+        src: templates/0002_auto.py.j2
+        dest: ~funicello/Desktop/dsereviews/files/webapp/reviews/migrations/0002_auto.py
+        mode: '0644'
 
     - name: "Migrate"
       ansible.builtin.command: python ~funicello/Desktop/dsereviews/files/webapp/manage.py migrate --no-input
 
-    - name: "Initadmin"
-      ansible.builtin.command: python ~funicello/Desktop/dsereviews/files/webapp/manage.py initadmin 
+    # - name: "Initadmin"
+    #   ansible.builtin.command: python ~funicello/Desktop/dsereviews/files/webapp/manage.py initadmin 
 
     - name: "Runserver"
       ansible.builtin.command: python ~funicello/Desktop/dsereviews/files/webapp/manage.py runserver 0.0.0.0:8000

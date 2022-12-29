@@ -1,6 +1,6 @@
 certbot_testmode: false
 
-debug: 1
+debug: 0
 django_allowed_hosts: dsereviews.live
 
 sql_engine: django.db.backends.postgresql
@@ -10,3 +10,5 @@ sql_password: postgresdbpassword
 sql_host: localhost
 sql_port: 5432
 database: postgres
+
+nginx_server_name: "dsereviews.live www.dsereviews.live"

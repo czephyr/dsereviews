@@ -14,7 +14,7 @@
 
 - name: Deploy certbot
   import_playbook: playbook_3_certbot.yml
-  tags: remote
+  tags: [remote, prod]
 
 - name: Deploy nginx
   import_playbook: playbook_4_nginx.yml

@@ -10,3 +10,5 @@ sql_password: postgresdbpassword
 sql_host: localhost
 sql_port: 5432
 database: postgres
+
+nginx_server_name: "_"
