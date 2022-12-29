@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Professor, Review, User
+from reviews.models import Course, Review, User
 from django_registration.forms import RegistrationForm
 
 
@@ -25,8 +25,12 @@ class ReviewForm(forms.ModelForm):
 
         widgets = {}
 
-
 class EmailDomainFilterRegistrationForm(RegistrationForm):
+    class Meta(RegistrationForm.Meta):
+        model = User
+        fields = ("username", "email", "bachelor", "password1", "password2")
+
+
     # List of allowed email domains
     allowed_domain = "studenti.unimi.it"
 
