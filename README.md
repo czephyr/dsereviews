@@ -1,6 +1,6 @@
 ### Dsereviews
 A Django webapp deployed through Ansible to anonymously review the master's courses. 
-Deployed at dsereviews.live.
+Deployed at [dsereviews.live](https://dsereviews.live).
 
 --
 
